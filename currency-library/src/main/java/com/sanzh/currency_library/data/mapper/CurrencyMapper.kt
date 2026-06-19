@@ -25,7 +25,7 @@ object CurrencyMapper {
     )
 
     fun mapToDomain(response: ExchangeRateResponse): List<Currency> {
-        return response.conversionRates
+        return (response.conversionRates ?: emptyMap())
             .filter { CURRENCY_NAMES.containsKey(it.key) }
             .map { (code, rate) ->
                 Currency(
